@@ -9,4 +9,14 @@ if (Test-Path $root) {
 
     # Set up prompt
     . "$root\Development\posh-git\profile.example.ps1"
+
+    # Set up TF
+    if (Test-Path $env:VS120COMNTOOLS) {
+        set-alias -name tf -value "$env:VS120COMNTOOLS..\IDE\tf.exe"
+    }
+
+    # Set up TFPT
+    if (Test-Path $env:TFSPowerToolDir) {
+        set-alias -name tfpt -value "${env:TFSPowerToolDir}TFPT.EXE"
+    }
 }
