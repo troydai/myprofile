@@ -4,6 +4,11 @@ if (Test-Path $root) {
     # Sublime Text 
     set-alias -name subl -value "$root\Software\Sublime_Text\sublime_text.exe"
 
+    # VIM
+    if (Test-Path $root\Software\Vim\vim73\vim.exe) {
+        set-alias -name vi -value "$root\Software\Vim\vim73\vim.exe"
+    }
+
     # GIT
     # set-alias -name git -value "$root\Software\Git\Cmd\git.exe"
 
@@ -14,10 +19,10 @@ if (Test-Path $root) {
     . "$root\Development\posh-git\profile.example.ps1"
 
     # Set up TF
-    if (Test-Path $env:VS120COMNTOOLS) {
+    if ($env:VS120COMNTOOLS -and (Test-Path $env:VS120COMNTOOLS)) {
         set-alias -name tf -value "$env:VS120COMNTOOLS..\IDE\tf.exe"
     }
-    elseif (Test-Path $env:VS110COMNTOOLS) {
+    elseif ($env:VS110COMNTOOLS -and (Test-Path $env:VS110COMNTOOLS)) {
         set-alias -name tf -value "$env:VS110COMNTOOLS..\IDE\tf.exe"
     }
 
