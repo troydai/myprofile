@@ -1,33 +1,15 @@
-﻿$root = $env:USERPROFILE + "\SkyDrive"
+Write-Host "Welcome, Troy!"
 
-if (Test-Path $root) {
-    # Sublime Text 
-    set-alias -name subl -value "$root\Software\Sublime_Text\sublime_text.exe"
-
-    # VIM
-    if (Test-Path $root\Software\Vim\vim73\vim.exe) {
-        set-alias -name vi -value "$root\Software\Vim\vim73\vim.exe"
-    }
-
-    # GIT
-    # set-alias -name git -value "$root\Software\Git\Cmd\git.exe"
-
-    # Add SSH to path
-    $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
-
-    # Set up prompt
-    . "$root\Development\posh-git\profile.example.ps1"
-
-    # Set up TF
-    if ($env:VS120COMNTOOLS -and (Test-Path $env:VS120COMNTOOLS)) {
-        set-alias -name tf -value "$env:VS120COMNTOOLS..\IDE\tf.exe"
-    }
-    elseif ($env:VS110COMNTOOLS -and (Test-Path $env:VS110COMNTOOLS)) {
-        set-alias -name tf -value "$env:VS110COMNTOOLS..\IDE\tf.exe"
-    }
-
-    # Set up TFPT
-    if (($env:TFSPowerToolDir -ne $null) -and (Test-Path $env:TFSPowerToolDir)) {
-        set-alias -name tfpt -value "${env:TFSPowerToolDir}TFPT.EXE"
-    }
+# Sublime text
+$myGit = $env:USERPROFILE + "\git"
+if (Test-Path "$myGit\posh-git\profile.example.ps1")
+{
+    . $myGit\posh-git\profile.example.ps1
 }
+
+# Add SSH to path
+$env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
+
+# Program files
+$sublimeTextExec = $env:ProgramFiles + "\Sublime Text 2\sublime_text.exe"
+set-alias subl $sublimeTextExec
