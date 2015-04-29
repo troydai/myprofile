@@ -30,6 +30,15 @@ function global:prompt {
 
     Write-VcsStatus
 
+    if (Get-Command dnvm -ErrorAction SilentlyContinue) {
+        $activeDnx = dnvm list -passthru | where { $_.Active }
+        if ($activeDnx) {
+            Write-Host " (" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
+            Write-Host "dnx-$($activeDnx.Runtime)-win-$($activeDnx.Architecture).$($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
+            Write-Host ")" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
+        }
+    }
+
     $global:LASTEXITCODE = $realLASTEXITCODE
 
     Write-Host ""
