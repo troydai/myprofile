@@ -48,3 +48,25 @@ function global:prompt {
 Enable-GitColors
 
 Start-SshAgent -Quiet
+
+# Conventient functions
+function DNX-Trace {
+    if (Test-Path env:DNX_TRACE)
+    {
+        if ($env:DNX_TRACE -eq '1')
+        {
+            $env:DNX_TRACE='0'
+            Write-Host "DNX trace is turned off."
+        }
+        else
+        {
+            $env:DNX_TRACE='1'
+            Write-Host "DNX trace is turned on."
+        }
+    }
+    else
+    {
+        $env:DNX_TRACE='1'
+        Write-Host "DNX trace is turned on."
+    }
+}
