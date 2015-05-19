@@ -14,6 +14,21 @@ set-alias subl $sublimeTextExec
 # Add SSH to path
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 
+# Add Python to Path
+if (Test-Path "C:\Python34")
+{
+    $env:PATH += ";C:\Python34"
+}
+
+function home {
+    cd $dp0
+    cd ..\
+}
+
+function go-profile {
+    cd $dp0
+}
+
 # Posh-Git
 
 # Load posh-git module from current directory
