@@ -20,6 +20,7 @@ if (Test-Path "C:\Python34")
     $env:PATH += ";C:\Python34"
 }
 
+# Location assistents
 function home {
     cd $dp0
     cd ..\
@@ -29,8 +30,17 @@ function go-profile {
     cd $dp0
 }
 
-# Posh-Git
+# DNX Tools
+function dnx-clean-packages {
+    python $dp0\k.toolkit\clean-packages.py
+}
 
+function dnx-clean-runtimes {
+    python $dp0\k.toolkit\clean-runtimes.py
+}
+
+# Posh-Git
+# ===============================================
 # Load posh-git module from current directory
 Import-Module $dp0\posh-git
 

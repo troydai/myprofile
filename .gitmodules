@@ -1,3 +1,6 @@
 [submodule "posh-git"]
 	path = posh-git
 	url = git@github.com:dahlbyk/posh-git.git
+[submodule "k.toolkit"]
+	path = k.toolkit
+	url = git@github.com:troydai/k.toolkit.git
