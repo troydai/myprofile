@@ -6,6 +6,10 @@ dp0="$( dirname "${BASH_SOURCE[0]}" )"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
 
+if [ ! -d $modules ]; then
+    git submodule update
+fi
+
 bash_git_prompt_path="$modules/bash-git-prompt/gitprompt.sh"
 if [ -f $bash_git_prompt_path ]; then
     source $bash_git_prompt_path
