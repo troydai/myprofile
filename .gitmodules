@@ -4,3 +4,9 @@
 [submodule "k.toolkit"]
 	path = k.toolkit
 	url = git@github.com:troydai/k.toolkit.git
+[submodule "modules/bash-git-prompt"]
+	path = modules/bash-git-prompt
+	url = git@github.com:magicmonty/bash-git-prompt.git
+[submodule "modules/aspnet-home"]
+	path = modules/aspnet-home
+	url = git@github.com:aspnet/Home.git
