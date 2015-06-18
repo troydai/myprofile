@@ -4,3 +4,9 @@
 [submodule "modules/aspnet-home"]
 	path = modules/aspnet-home
 	url = git@github.com:aspnet/Home.git
+[submodule "modules/k.toolkit"]
+	path = modules/k.toolkit
+	url = git@github.com:troydai/k.toolkit.git
+[submodule "modules/posh-git"]
+	path = modules/posh-git
+	url = git@github.com:dahlbyk/posh-git.git

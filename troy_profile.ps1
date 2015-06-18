@@ -1,6 +1,7 @@
 Write-Host "Welcome, Troy!"
 
 $dp0 = Split-Path $MyInvocation.MyCommand.Path
+$modules = "$dp0\modules"
 
 # Sublime
 $sublimeTextExec = $env:ProgramFiles + "\Sublime Text 3\sublime_text.exe"
@@ -32,11 +33,11 @@ function go-profile {
 
 # DNX Tools
 function dnx-clean-packages {
-    python $dp0\k.toolkit\clean-packages.py
+    python $modules\k.toolkit\clean-packages.py
 }
 
 function dnx-clean-runtimes {
-    python $dp0\k.toolkit\clean-runtimes.py
+    python $modules\k.toolkit\clean-runtimes.py
 }
 
 function dnx-feed ([string] $feedname) {
@@ -68,7 +69,7 @@ function dnx-feed ([string] $feedname) {
 # Posh-Git
 # ===============================================
 # Load posh-git module from current directory
-Import-Module $dp0\posh-git
+Import-Module $modules\posh-git
 
 # Set up a simple prompt, adding the git prompt parts inside git repos
 function global:prompt {
@@ -95,8 +96,6 @@ function global:prompt {
     Write-Host ""
     return "$ "
 }
-
-Enable-GitColors
 
 Start-SshAgent -Quiet
 
