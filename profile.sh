@@ -43,6 +43,8 @@ vim_path="/usr/local/Cellar/vim/7.4.712/bin"
 if [ -d $vim_path ]; then
     PATH="$vim_path;${PATH}"
 else
-    echo "Missing vim bin. Looked at $vim_path."
+    if [ ! -f /usr/bin/vim ]; then
+        echo "Missing vim bin. Looked at $vim_path. and /usr/bin/vim"
+    fi
 fi
 
