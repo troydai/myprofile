@@ -41,7 +41,7 @@ go-profile () {
 # vim
 vim_path="/usr/local/Cellar/vim/7.4.712/bin"
 if [ -d $vim_path ]; then
-    PATH="$vim_path;${PATH}"
+    PATH=$vim_path:${PATH}
 else
     if [ ! -f /usr/bin/vim ]; then
         echo "Missing vim bin. Looked at $vim_path. and /usr/bin/vim"
