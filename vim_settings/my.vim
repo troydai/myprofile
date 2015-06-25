@@ -5,7 +5,8 @@ set autoindent
 set number
 set et!
 
-set gfn=Monaco
+set gfn=Consolas
+
 
 set noswapfile
 
