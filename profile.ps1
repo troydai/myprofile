@@ -31,6 +31,10 @@ function go-profile {
     cd $dp0
 }
 
+function edit-profile {
+    vim $dp0\profile.ps1
+}
+
 # DNX Tools
 function dnx-clean-packages {
     python $modules\k.toolkit\clean-packages.py
