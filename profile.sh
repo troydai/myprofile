@@ -38,6 +38,14 @@ go-profile () {
     cd $dp0
 }
 
+dnx-clean-packages () {
+    ./modules/k.toolkit/clean-packages.py
+}
+
+dnx-clean-runtimes () {
+    ./modules/k.toolkit/clean-runtimes.py
+}
+
 # vim
 vim_path="/usr/local/Cellar/vim/7.4.712/bin"
 if [ -d $vim_path ]; then
