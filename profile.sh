@@ -39,11 +39,11 @@ go-profile () {
 }
 
 dnx-clean-packages () {
-    ./modules/k.toolkit/clean-packages.py
+    $dp0/modules/k.toolkit/clean-packages.py
 }
 
 dnx-clean-runtimes () {
-    ./modules/k.toolkit/clean-runtimes.py
+    $dp0/modules/k.toolkit/clean-runtimes.py
 }
 
 # vim
