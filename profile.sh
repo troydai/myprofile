@@ -24,7 +24,7 @@ else
     echo "Missing DNVM. Try restore the submodules."
 fi
 
-export DNX_FEED="https://www.myget.org/F/aspnetcidev/api/v2"
+export DNX_UNSTABLE_FEED="https://www.myget.org/F/aspnetvolatiledev/api/v2"
 
 code () {
     VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*
