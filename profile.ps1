@@ -46,10 +46,10 @@ function dnx-clean-runtimes {
 
 function dnx-feed ([string] $feedname) {
     if ($feedname -eq "dev") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetvolatiln/api/v2"
+        $env:DNX_FEED = "https://www.myget.org/F/aspnetcidev/api/v2"
     }
     elseif ($feedname -eq "volatile") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetvolatiln/api/v2"
+        $env:DNX_FEED = "https://www.myget.org/F/aspnetvolatiledev/api/v2"
     }
     elseif ($feedname -eq "release") {
         $env:DNX_FEED = "https://www.myget.org/F/aspnetrelease/api/v2"
@@ -59,9 +59,6 @@ function dnx-feed ([string] $feedname) {
     }
     elseif ($feedname -eq "nuget") {
         $env:DNX_FEED = "https://www.nuget.org/api/v2"
-    }
-    elseif ($feedname -eq "beta5") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetbeta5/api/v2"
     }
     else {
         Write-Host "Unknown option $feedname"
