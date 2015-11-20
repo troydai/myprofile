@@ -21,6 +21,12 @@ if (Test-Path "C:\Python34")
     $env:PATH += ";C:\Python34"
 }
 
+# Add Dotnet
+if (Test-Path "$env:userprofile\AppData\Local\Microsoft\dotnet\cli\bin")
+{
+    $env:PATH += ";$env:userprofile\AppData\Local\Microsoft\dotnet\cli\bin"
+}
+
 # Location assistents
 function home {
     cd $dp0
@@ -61,9 +67,10 @@ function dnx-feed ([string] $feedname) {
         $env:DNX_FEED = "https://www.nuget.org/api/v2"
     }
     else {
-        Write-Host "Unknown option $feedname"
-        Write-Host "Available options: dev, volatiln, relese, vnext and nuget"
+        Write-Host "Customize $feedname"
+        $env:DNX_FEED = "https://www.myget.org/F/$feedname/api/v2"
     }
+
     Write-Host "Current DNX_FEED is $env:DNX_FEED"
 }
 
