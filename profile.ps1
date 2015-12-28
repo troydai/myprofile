@@ -1,25 +1,12 @@
-Write-Host "Welcome, Troy!"
-
 $dp0 = Split-Path $MyInvocation.MyCommand.Path
 $modules = "$dp0\modules"
-
-# Sublime
-$sublimeTextExec = $env:ProgramFiles + "\Sublime Text 3\sublime_text.exe"
-if (-not (Test-Path $sublimeTextExec))
-{
-    $sublimeTextExec = $env:ProgramFiles + "\Sublime Text 2\sublime_text.exe"
-}
-
-set-alias subl $sublimeTextExec
 
 # Add SSH to path
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 
-# Add Python to Path
-if (Test-Path "C:\Python34")
-{
-    $env:PATH += ";C:\Python34"
-}
+# TODO:
+# 1. Set up text editor
+# 2. Set up Python
 
 # Add Dotnet
 if (Test-Path "$env:userprofile\AppData\Local\Microsoft\dotnet\cli\bin")
@@ -74,39 +61,6 @@ function dnx-feed ([string] $feedname) {
     Write-Host "Current DNX_FEED is $env:DNX_FEED"
 }
 
-# Posh-Git
-# ===============================================
-# Load posh-git module from current directory
-Import-Module $modules\posh-git
-
-# Set up a simple prompt, adding the git prompt parts inside git repos
-function global:prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
-
-    # Reset color, which can be messed up by Enable-GitColors
-    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
-
-    Write-Host($pwd.ProviderPath) -nonewline
-
-    Write-VcsStatus
-
-    if (Get-Command dnvm -ErrorAction SilentlyContinue) {
-        $activeDnx = dnvm list -passthru | where { $_.Active }
-        if ($activeDnx) {
-            Write-Host " (" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
-            Write-Host "dnx-$($activeDnx.Runtime)-win-$($activeDnx.Architecture).$($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
-            Write-Host ")" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
-        }
-    }
-
-    $global:LASTEXITCODE = $realLASTEXITCODE
-
-    Write-Host ""
-    return "$ "
-}
-
-Start-SshAgent -Quiet
-
 # Conventient functions
 function DNX-Trace {
     if (Test-Path env:DNX_TRACE)
@@ -128,3 +82,52 @@ function DNX-Trace {
         Write-Host "DNX trace is turned on."
     }
 }
+
+# Posh-Git
+# ===============================================
+# Load posh-git module from current directory
+Import-Module $modules\posh-git
+
+function Write-DnxStatue {
+	if ((Test-Path "project.json") -or (Test-Path "global.json")) 
+	{
+		if (Get-Command dnvm -ErrorAction SilentlyContinue) {
+			$activeDnx = dnvm list -passthru | where { $_.Active }
+			if ($activeDnx) {
+				Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
+				Write-Host "dnx-$($activeDnx.Runtime)-win-$($activeDnx.Architecture).$($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
+				Write-Host "]" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
+			}
+		}
+	}
+}
+
+# Set up a simple prompt, adding the git prompt parts inside git repos
+function global:prompt {
+	$start = [System.DateTime]::Now
+    $realLASTEXITCODE = $LASTEXITCODE
+
+    # Reset color, which can be messed up by Enable-GitColors
+    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+    Write-Host($pwd.ProviderPath) -nonewline
+
+    Write-VcsStatus
+	Write-DnxStatue
+
+    $global:LASTEXITCODE = $realLASTEXITCODE
+
+	$end = [System.DateTime]::Now
+	$time = ($end-$start).TotalMilliseconds
+
+	if ($time -gt 100)
+	{
+		Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
+		Write-Host "latency $time ms" -NoNewline -foregroundColor([ConsoleColor]::Cyan)
+		Write-Host "]" -NoNewline -ForegroundColor ([ConsoleColor]::Yellow)
+	}
+
+	Write-Host ""
+    return "$ "
+}
+
+# Start-SshAgent -Quiet
