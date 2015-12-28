@@ -88,18 +88,53 @@ function DNX-Trace {
 # Load posh-git module from current directory
 Import-Module $modules\posh-git
 
+function IsProjectFolder ([string] $path) {
+    if (Test-Path "$path\project.json") {
+        return $True
+    }
+    
+    if (Test-Path "$path\global.json") {
+        return $True
+    }
+    
+    return $False
+}
+
 function Write-DnxStatue {
-	if ((Test-Path "project.json") -or (Test-Path "global.json")) 
-	{
-		if (Get-Command dnvm -ErrorAction SilentlyContinue) {
-			$activeDnx = dnvm list -passthru | where { $_.Active }
-			if ($activeDnx) {
-				Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
-				Write-Host "dnx-$($activeDnx.Runtime)-win-$($activeDnx.Architecture).$($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
-				Write-Host "]" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
-			}
-		}
-	}
+    $currentPath = $pwd
+    while (-not (IsProjectFolder($currentPath))) {
+        $parent = [System.IO.Path]::GetDirectoryName($currentPath)
+        if ($parent -eq $Null) {
+            return
+        }
+        
+        $currentPath = $parent
+    }
+    
+    if (Get-Command dnvm -ErrorAction SilentlyContinue) {
+        $activeDnx = dnvm list -passthru | where { $_.Active }
+        if ($activeDnx) {
+            $r = ""
+                    
+            if ($activeDnx.Runtime -eq "clr")
+            {
+                $r = "F"
+            }
+            elseif ($activeDnx.Runtime -eq "coreclr")
+            {
+                $r = "C"
+            }
+            else
+            {
+                $r = $activeDnx.Runtime
+            }
+            
+            $r += $activeDnx.Architecture
+            Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
+            Write-Host "$r $($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
+            Write-Host "]" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
+        }
+    }
 }
 
 # Set up a simple prompt, adding the git prompt parts inside git repos
@@ -119,7 +154,7 @@ function global:prompt {
 	$end = [System.DateTime]::Now
 	$time = ($end-$start).TotalMilliseconds
 
-	if ($time -gt 100)
+	if ($time -gt 200)
 	{
 		Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
 		Write-Host "latency $time ms" -NoNewline -foregroundColor([ConsoleColor]::Cyan)
