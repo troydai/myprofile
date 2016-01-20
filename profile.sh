@@ -1,7 +1,5 @@
 # bash profile
 
-echo "Welcome, Troy!"
-
 dp0="$( dirname "${BASH_SOURCE[0]}" )"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
@@ -47,7 +45,7 @@ dnx-clean-runtimes () {
 }
 
 # vim
-vim_path="/usr/local/Cellar/vim/7.4.712/bin"
+vim_path="/usr/local/Cellar/vim/7.4.979/bin"
 if [ -d $vim_path ]; then
     PATH=$vim_path:${PATH}
 else
@@ -55,4 +53,3 @@ else
         echo "Missing vim bin. Looked at $vim_path. and /usr/bin/vim"
     fi
 fi
-
