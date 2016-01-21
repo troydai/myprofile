@@ -4,6 +4,9 @@ $modules = "$dp0\modules"
 # Add SSH to path
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 
+# DOTNET_HOME
+$env:DOTNET_HOME="$env:USERPROFILE\AppData\Local\Microsoft\dotnet\cli"
+
 # TODO:
 # 1. Set up text editor
 # 2. Set up Python
@@ -139,7 +142,7 @@ function Write-DnxStatue {
 
 # Set up a simple prompt, adding the git prompt parts inside git repos
 function global:prompt {
-	$start = [System.DateTime]::Now
+    $start = [System.DateTime]::Now
     $realLASTEXITCODE = $LASTEXITCODE
 
     # Reset color, which can be messed up by Enable-GitColors
