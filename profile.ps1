@@ -5,17 +5,15 @@ $modules = "$dp0\modules"
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 
 # DOTNET_HOME
-$env:DOTNET_HOME="$env:USERPROFILE\AppData\Local\Microsoft\dotnet\cli"
+$env:DOTNET_HOME="$env:LocalAppData\Microsoft\dotnet\cli"
+if (Test-Path $env:DOTNET_HOME)
+{
+    $env:PATH += ";$env:DOTNET_HOME\bin"
+}
 
 # TODO:
 # 1. Set up text editor
 # 2. Set up Python
-
-# Add Dotnet
-if (Test-Path "$env:userprofile\AppData\Local\Microsoft\dotnet\cli\bin")
-{
-    $env:PATH += ";$env:userprofile\AppData\Local\Microsoft\dotnet\cli\bin"
-}
 
 # Location assistents
 function home {
@@ -114,29 +112,12 @@ function Write-DnxStatue {
         $currentPath = $parent
     }
     
-    if (Get-Command dnvm -ErrorAction SilentlyContinue) {
-        $activeDnx = dnvm list -passthru | where { $_.Active }
-        if ($activeDnx) {
-            $r = ""
-                    
-            if ($activeDnx.Runtime -eq "clr")
-            {
-                $r = "F"
-            }
-            elseif ($activeDnx.Runtime -eq "coreclr")
-            {
-                $r = "C"
-            }
-            else
-            {
-                $r = $activeDnx.Runtime
-            }
-            
-            $r += $activeDnx.Architecture
-            Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
-            Write-Host "$r $($activeDnx.Version)" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
-            Write-Host "]" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
-        }
+    if (Test-Path "$env:DOTNET_HOME\.version")
+    {
+        $dotnet_version = gc "$env:DOTNET_HOME\.version" | select -skip 1
+        Write-Host " [" -nonewline -foregroundColor ([ConsoleColor]::Yellow)
+        Write-Host "$dotnet_version" -nonewline -foregroundColor ([ConsoleColor]::Cyan)
+        Write-Host "]" -nonewline -ForegroundColor ([ConsoleColor]::Yellow)
     }
 }
 
