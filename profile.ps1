@@ -11,8 +11,12 @@ if (Test-Path $env:DOTNET_HOME)
     $env:PATH += ";$env:DOTNET_HOME\bin"
 }
 
-# TODO:
 # 1. Set up text editor
+if (Test-Path "$env:ProgramFiles\Sublime Text 3\subl.exe")
+{
+    set-alias subl "$env:ProgramFiles\Sublime Text 3\subl.exe"
+}
+
 # 2. Set up Python
 
 # Location assistents
