@@ -14,7 +14,6 @@ if [ -f $bash_git_prompt_path ]; then
 else
     echo "Missing Bash Git Prompt. Try restore the submodules."
 fi
-
 local_dnvm_path="$modules/aspnet-home/dnvm.sh"
 if [ -f $local_dnvm_path ]; then
     source $local_dnvm_path
@@ -42,6 +41,13 @@ dnx-clean-packages () {
 
 dnx-clean-runtimes () {
     $dp0/modules/k.toolkit/clean-runtimes.py
+}
+
+update-dotnet () {
+    mkdir -p /tmp/dotnet_install
+    curl -o /tmp/dotnet_install/install.sh "https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0/scripts/obtain/install.sh" -s
+    chmod +x /tmp/dotnet_install/install.sh
+    /tmp/dotnet_install/install.sh -c beta
 }
 
 # vim
