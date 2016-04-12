@@ -29,6 +29,9 @@ code () {
 
 home () {
     cd $root
+    if [ ! -z "$1" ]; then
+        cd $1
+    fi
 }
 
 go-profile () {
