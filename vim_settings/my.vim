@@ -13,4 +13,4 @@ set gfn=Consolas
 set noswapfile
 set nobackup
 
-colorscheme desert
+colorscheme Kafka
