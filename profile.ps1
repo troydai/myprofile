@@ -5,7 +5,7 @@ $modules = "$dp0\modules"
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 
 # DOTNET_HOME
-$env:PATH += ";$env:LocalAppData\Microsoft\.dotnet"
+$env:PATH += ";$env:LocalAppData\Microsoft\dotnet"
 
 # 1. Set up text editor
 if (Test-Path "$env:ProgramFiles\Sublime Text 3\subl.exe")
