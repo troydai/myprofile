@@ -27,7 +27,15 @@ home () {
 }
 
 go-profile () {
-    cd $dp0
+  cd $dp0
+}
+
+go-dotnet () {
+  cd $( dirname `type dotnet | cut -d " " -f 3` )
+}
+
+go-nuget() {
+  cd $HOME/.local/share/NuGet/
 }
 
 nuke-packages () {
