@@ -1,5 +1,7 @@
 # bash profile
 
+set -o vi
+
 dp0="$( dirname "${BASH_SOURCE[0]}" )"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
@@ -75,3 +77,8 @@ list-shared-runtimes () {
 
   ls $dotnet_folder/shared/Microsoft.NETCore.App/
 }
+
+echo 
+fortune
+echo
+
