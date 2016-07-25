@@ -1,7 +1,5 @@
 # bash profile
 
-set -o vi
-
 dp0="$( dirname "${BASH_SOURCE[0]}" )"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
@@ -76,6 +74,13 @@ list-shared-runtimes () {
   dotnet_folder=$( dirname `type -p dotnet`)
 
   ls $dotnet_folder/shared/Microsoft.NETCore.App/
+}
+
+clear-docker-none-images () {
+  for image_id in `docker images | grep "<none>" | tr -s ' ' | cut -d ' ' -f3`
+  do
+    docker rmi $image_id $@
+  done
 }
 
 echo 
