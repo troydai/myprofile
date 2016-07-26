@@ -30,58 +30,12 @@ function edit-profile {
 }
 
 # DNX Tools
-function dnx-clean-packages {
+function nuke-packages {
     python $modules\k.toolkit\clean-packages.py
 }
 
-function dnx-clean-runtimes {
+function nuke-runtimes {
     python $modules\k.toolkit\clean-runtimes.py
-}
-
-function dnx-feed ([string] $feedname) {
-    if ($feedname -eq "dev") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetcidev/api/v2"
-    }
-    elseif ($feedname -eq "volatile") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetvolatiledev/api/v2"
-    }
-    elseif ($feedname -eq "release") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetrelease/api/v2"
-    }
-    elseif ($feedname -eq "vnext") {
-        $env:DNX_FEED = "https://www.myget.org/F/aspnetvnext/api/v2"
-    }
-    elseif ($feedname -eq "nuget") {
-        $env:DNX_FEED = "https://www.nuget.org/api/v2"
-    }
-    else {
-        Write-Host "Customize $feedname"
-        $env:DNX_FEED = "https://www.myget.org/F/$feedname/api/v2"
-    }
-
-    Write-Host "Current DNX_FEED is $env:DNX_FEED"
-}
-
-# Conventient functions
-function DNX-Trace {
-    if (Test-Path env:DNX_TRACE)
-    {
-        if ($env:DNX_TRACE -eq '1')
-        {
-            $env:DNX_TRACE='0'
-            Write-Host "DNX trace is turned off."
-        }
-        else
-        {
-            $env:DNX_TRACE='1'
-            Write-Host "DNX trace is turned on."
-        }
-    }
-    else
-    {
-        $env:DNX_TRACE='1'
-        Write-Host "DNX trace is turned on."
-    }
 }
 
 # Posh-Git
