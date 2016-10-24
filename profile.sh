@@ -83,10 +83,7 @@ clear-docker-none-images () {
   done
 }
 
-echo 
-fortune
-echo
-
+which fortune > /dev/null && echo && fortune && echo
 
 # pip bash completion start
 _pip_completion()
