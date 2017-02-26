@@ -1,9 +1,6 @@
 [submodule "modules/bash-git-prompt"]
 	path = modules/bash-git-prompt
 	url = git@github.com:magicmonty/bash-git-prompt.git
-[submodule "modules/k.toolkit"]
-	path = modules/k.toolkit
-	url = git@github.com:troydai/k.toolkit.git
 [submodule "modules/posh-git"]
 	path = modules/posh-git
 	url = git@github.com:dahlbyk/posh-git.git
