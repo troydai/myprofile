@@ -40,3 +40,6 @@ complete -o default -F _pip_completion pip
 
 # GIT complete
 source $dp0/git-completion.bash
+
+# turn off bell
+set bell-style visual
