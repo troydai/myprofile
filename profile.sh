@@ -1,5 +1,9 @@
 # bash profile
 
+# bash settings
+set -o vi
+
+
 dp0="$( dirname "${BASH_SOURCE[0]}" )"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
@@ -8,12 +12,39 @@ if [ ! -d $modules ]; then
     git submodule update
 fi
 
+### Auto adjust Azure CLI configuration dir ###################################
+
+_azure_cli_hook() {
+    # When enter a folder check if there is a .azure-config folder set that 
+    # folder as AZURE_CONFIG_DIR
+    
+    timestamp=`date "+%H:%M"`
+
+    if [[ -n `command -v az` ]] && [[ -d .azure-config ]]; then
+        export AZURE_CONFIG_DIR=$(cd .azure-config; pwd)
+        GIT_PROMPT_END=' [\[\033[0;32m\]az*\[\033[0;0m\]] \n$timestamp $ '
+    else
+        unset AZURE_CONFIG_DIR
+        GIT_PROMPT_END=' \n$timestamp $ '
+    fi
+}
+
+PROMPT_COMMAND="_azure_cli_hook;$PROMPT_COMMAND"
+
+
+### Git prompt  ###############################################################
+
 bash_git_prompt_path="$modules/bash-git-prompt/gitprompt.sh"
 if [ -f $bash_git_prompt_path ]; then
     source $bash_git_prompt_path
 else
     echo "Missing Bash Git Prompt. Try restore the submodules."
 fi
+
+GIT_PROMPT_THEME=Chmike
+
+
+### Shortcuts #################################################################
 
 home () {
     cd $root
@@ -46,3 +77,5 @@ set bell-style visual
 
 # Go Programming Language
 export PATH=$PATH:$(go env GOPATH)/bin
+
+
