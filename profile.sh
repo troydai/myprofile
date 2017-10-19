@@ -78,4 +78,4 @@ set bell-style visual
 # Go Programming Language
 export PATH=$PATH:$(go env GOPATH)/bin
 
-
+home
