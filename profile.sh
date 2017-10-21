@@ -36,12 +36,12 @@ PROMPT_COMMAND="_azure_cli_hook;$PROMPT_COMMAND"
 
 bash_git_prompt_path="$modules/bash-git-prompt/gitprompt.sh"
 if [ -f $bash_git_prompt_path ]; then
+    GIT_PROMPT_THEME=Plague_Doctor
+    GIT_PROMPT_ONLY_IN_REPO=0
     source $bash_git_prompt_path
 else
     echo "Missing Bash Git Prompt. Try restore the submodules."
 fi
-
-GIT_PROMPT_THEME=Chmike
 
 
 ### Shortcuts #################################################################
