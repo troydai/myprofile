@@ -44,6 +44,21 @@ else
 fi
 
 
+### Switch Python Virtual Environment #########################################
+
+gitpyenv () {
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    dir=$(basename $(pwd))
+
+    if [ ! -d ../venvs/$dir/$branch ]; then
+        virtualenv ../venvs/$dir/$branch
+    fi
+
+    deactivate 2>/dev/null
+    . ../venvs/$dir/$branch/bin/activate
+}
+
+
 ### Shortcuts #################################################################
 
 home () {
