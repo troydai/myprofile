@@ -50,11 +50,9 @@ gitpyenv () {
     branch=$(git rev-parse --abbrev-ref HEAD)
     dir=$(basename $(pwd))
 
-    if [ ! -d ../venvs/$dir/$branch ]; then
-        virtualenv ../venvs/$dir/$branch
-    fi
-
     deactivate 2>/dev/null
+    virtualenv ../venvs/$dir/$branch $*
+
     . ../venvs/$dir/$branch/bin/activate
 }
 
