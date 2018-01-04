@@ -51,9 +51,9 @@ gitpyenv () {
     dir=$(basename $(pwd))
 
     deactivate 2>/dev/null
-    virtualenv ../venvs/$dir/$branch $*
+    virtualenv ~/.gitpyenv/$dir/$branch $*
 
-    . ../venvs/$dir/$branch/bin/activate
+    . ../.gitpyenv/$dir/$branch/bin/activate
 }
 
 
