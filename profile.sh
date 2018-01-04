@@ -51,9 +51,11 @@ gitpyenv () {
     dir=$(basename $(pwd))
 
     deactivate 2>/dev/null
-    virtualenv ~/.gitpyenv/$dir/$branch $*
+    if [ ! -d ~/.gitpyenv/$dir/$branch ]; then
+        virtualenv ~/.gitpyenv/$dir/$branch $*
+    fi
 
-    . ../.gitpyenv/$dir/$branch/bin/activate
+    . ~/.gitpyenv/$dir/$branch/bin/activate
 }
 
 
