@@ -44,20 +44,13 @@ else
 fi
 
 
-### Switch Python Virtual Environment #########################################
+### Pyenv #####################################################################
 
-gitpyenv () {
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    dir=$(basename $(pwd))
-
-    deactivate 2>/dev/null
-    if [ ! -d ~/.gitpyenv/$dir/$branch ]; then
-        virtualenv ~/.gitpyenv/$dir/$branch $*
-    fi
-
-    . ~/.gitpyenv/$dir/$branch/bin/activate
-}
-
+if [ -d ~/.pyenv/bin ]; then
+    export PATH="/home/troy/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 ### Shortcuts #################################################################
 
