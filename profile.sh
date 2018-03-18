@@ -44,6 +44,14 @@ else
 fi
 
 
+### GO Programming Language ###################################################
+
+if command -v go >/dev/null 2>&1; then
+    export PATH="$(go env GOPATH)/bin:$PATH"
+fi
+
+
+
 ### Pyenv #####################################################################
 
 if [ -d ~/.pyenv/bin ]; then
