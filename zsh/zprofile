@@ -1,5 +1,8 @@
+export MY_PROFILE_ROOT=`cd $(dirname $(readlink -n ${(%):-%N})); cd ..; pwd`
+code=`cd $MY_PROFILE_ROOT; cd ..; pwd`
+
 ## Environment Variables #####################################################
-export PATH="$PATH:$HOME/code/myprofile/modules/powerline/scripts"
+export PATH="$PATH:$root/modules/powerline/scripts"
 
 ### GO Programming Language ###################################################
 
@@ -13,14 +16,14 @@ fi
 ### Shortcuts #################################################################
 
 home () {
-    cd $HOME/code
+    cd $code
     if [ ! -z "$1" ]; then
         cd $1
     fi
 }
 
 go-profile () {
-  cd $HOME/code/myprofile
+  cd $MY_PROFILE_ROOT
 }
 
 ### RBENV #####################################################################
@@ -35,4 +38,3 @@ fi
 # Travis
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
-cd ~
