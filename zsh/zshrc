@@ -65,6 +65,7 @@ plugins=(
   docker
   vi-mode
   tmux
+  kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
