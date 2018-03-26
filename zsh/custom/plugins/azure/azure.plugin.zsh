@@ -10,11 +10,11 @@ function azure_prompt_info() {
     fi
 
     JQ_TEMPLATE='.subscriptions[] | select(.isDefault == true) | [.name, .user.name] | join("|")'
-    if [[ -d .azure-config ]]; then
+    if [[ -e .azure-config/azureProfile.json ]]; then
         context=$(cat .azure-config/azureProfile.json | jq $JQ_TEMPLATE)
         context=${context//\"/}
         echo "$context"
-    elif [[ -d $HOME/.azure ]]; then
+    elif [[ -e $HOME/.azure/azureProfile.json ]]; then
         context=$(cat $HOME/.azure/azureProfile.json | jq $JQ_TEMPLATE)
         context=${context//\"/}
         echo "\xE2\x98\x81 $context"
