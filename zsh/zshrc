@@ -64,6 +64,7 @@ plugins=(
   tmux
   kubectl
   azure
+  pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
