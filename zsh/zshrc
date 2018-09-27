@@ -61,12 +61,10 @@ ZSH_CUSTOM=$MY_PROFILE_ROOT/zsh/custom
 plugins=(
   git
   tmux
-  pyenv
   docker
   vi-mode
   tmux
   kubectl
-  azure
 )
 
 source $ZSH/oh-my-zsh.sh
