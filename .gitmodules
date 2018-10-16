@@ -10,3 +10,6 @@
 [submodule "modules/oh-my-zsh"]
 	path = modules/oh-my-zsh
 	url = git@github.com:robbyrussell/oh-my-zsh.git
+[submodule "modules/macos-terminal-themes"]
+	path = modules/macos-terminal-themes
+	url = https://github.com/lysyi3m/macos-terminal-themes.git
