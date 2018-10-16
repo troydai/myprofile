@@ -3,9 +3,11 @@
 # bash settings
 set -o vi
 
+
 dp0="$(dirname $(readlink ${BASH_SOURCE[0]}))"
 root="$( dirname $dp0 )"
 modules="$dp0/modules"
+
 
 if [ ! -d $modules ]; then
     git submodule update
@@ -21,13 +23,6 @@ else
 fi
 
 
-### GO Programming Language ###################################################
-
-if command -v go >/dev/null 2>&1; then
-    export PATH="$(go env GOPATH)/bin:$PATH"
-fi
-
-
 ### Shortcuts #################################################################
 
 home () {
@@ -35,10 +30,6 @@ home () {
     if [ ! -z "$1" ]; then
         cd $1
     fi
-}
-
-go-profile () {
-  cd $dp0
 }
 
 which fortune > /dev/null 2>&1 && echo && fortune && echo
