@@ -6,7 +6,7 @@
 set -o vi
 
 # Find the paths
-dp0=`cd $(dirname $(readlink ${BASH_SOURCE[0]})); cd ..; pwd`
+dp0=`cd $(dirname ${BASH_SOURCE[0]}); cd ..; pwd`
 modules="$dp0/modules"
 
 # Show the modules missing, which happens when the repository was not cloned recursively.
