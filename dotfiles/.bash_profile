@@ -43,3 +43,5 @@ export PATH="/usr/local/sbin:$PATH"
 # Aliases
 alias gococo='cd ~/gocode/src/code.uber.internal/infra/coconut'
 alias gopf="cd $dp0"
+alias tnw='tmux new-window'
+
